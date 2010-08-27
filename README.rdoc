@@ -1,0 +1,6 @@
+
+== Description
+
+Tool that will be used for configuration of AUTOSAR COM module developed at TRW.
+
+

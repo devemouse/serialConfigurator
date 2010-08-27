@@ -1,0 +1,93 @@
+///////////////////////////////////////////////////////////////////////////
+// C++ code generated with wxFormBuilder (version Apr 16 2008)
+// http://www.wxformbuilder.org/
+//
+// PLEASE DO "NOT" EDIT THIS FILE!
+///////////////////////////////////////////////////////////////////////////
+
+#include "MainWindow.h"
+
+///////////////////////////////////////////////////////////////////////////
+
+MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW ) );
+	
+	wxBoxSizer* bSizer1;
+	bSizer1 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_filesList = new wxListBox( this, ID_FILES_LIST, wxDefaultPosition, wxDefaultSize, 0, NULL, wxLB_SINGLE|wxLB_SORT ); 
+	bSizer1->Add( m_filesList, 0, wxALL|wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer3;
+	bSizer3 = new wxBoxSizer( wxVERTICAL );
+	
+	m_workingDirPicker = new wxDirPickerCtrl( this, ID_DIR_PICKER, wxT("../tmpcfg/"), wxT("Select a folder"), wxDefaultPosition, wxDefaultSize, wxDIRP_DEFAULT_STYLE );
+	bSizer3->Add( m_workingDirPicker, 0, wxALL|wxEXPAND, 5 );
+	
+	m_Text = new wxRichTextCtrl( this, ID_TEXT_BOX, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), 0|wxHSCROLL|wxSIMPLE_BORDER|wxVSCROLL|wxWANTS_CHARS );
+	bSizer3->Add( m_Text, 1, wxALL|wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer2;
+	bSizer2 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_textLine = new wxTextCtrl( this, ID_TEXT_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0|wxSIMPLE_BORDER );
+	bSizer2->Add( m_textLine, 1, wxALL|wxEXPAND, 5 );
+	
+	m_addButton = new wxButton( this, ID_ADD_BUTTON, wxT("Add"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_addButton->SetDefault(); 
+	bSizer2->Add( m_addButton, 0, wxALIGN_RIGHT|wxALL, 5 );
+	
+	bSizer3->Add( bSizer2, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer4;
+	bSizer4 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_dbgButton01 = new wxButton( this, ID_DBG_BUTTON_01, wxT("m_dbgButton01"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer4->Add( m_dbgButton01, 0, wxALL|wxEXPAND, 1 );
+	
+	m_dbgButton02 = new wxButton( this, ID_DBG_BUTTON_01, wxT("m_dbgButton02"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer4->Add( m_dbgButton02, 0, wxALL|wxEXPAND, 1 );
+	
+	bSizer3->Add( bSizer4, 0, wxEXPAND, 5 );
+	
+	bSizer1->Add( bSizer3, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5;
+	bSizer5 = new wxBoxSizer( wxVERTICAL );
+	
+	buttonsSizer = new wxGridSizer( 8, 8, 0, 0 );
+	
+	buttonsSizer->SetMinSize( wxSize( 80,80 ) ); 
+	bSizer5->Add( buttonsSizer, 3, wxEXPAND, 1 );
+	
+	
+	bSizer5->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	bSizer1->Add( bSizer5, 1, wxEXPAND, 5 );
+	
+	this->SetSizer( bSizer1 );
+	this->Layout();
+	
+	// Connect Events
+	this->Connect( wxEVT_ACTIVATE, wxActivateEventHandler( MainFrame::MainWindowActivatedEvtHdl ) );
+	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( MainFrame::MainWindowCloseEvtHdl ) );
+	m_filesList->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( MainFrame::FileSelectedEvtHdl ), NULL, this );
+	m_workingDirPicker->Connect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame::ListFilesEvtHdl ), NULL, this );
+	m_addButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::AddNoteEvtHdl ), NULL, this );
+	m_dbgButton01->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton01ClickEvtHdl ), NULL, this );
+	m_dbgButton02->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton02ClickEvtHdl ), NULL, this );
+}
+
+MainFrame::~MainFrame()
+{
+	// Disconnect Events
+	this->Disconnect( wxEVT_ACTIVATE, wxActivateEventHandler( MainFrame::MainWindowActivatedEvtHdl ) );
+	this->Disconnect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( MainFrame::MainWindowCloseEvtHdl ) );
+	m_filesList->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( MainFrame::FileSelectedEvtHdl ), NULL, this );
+	m_workingDirPicker->Disconnect( wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame::ListFilesEvtHdl ), NULL, this );
+	m_addButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::AddNoteEvtHdl ), NULL, this );
+	m_dbgButton01->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton01ClickEvtHdl ), NULL, this );
+	m_dbgButton02->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton02ClickEvtHdl ), NULL, this );
+}
