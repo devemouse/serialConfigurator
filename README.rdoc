@@ -1,6 +1,6 @@
 
 == Description
 
-Tool that will be used for configuration of AUTOSAR COM module developed at TRW.
+Tool that would finally solve endiandess, bit size, bit position etc. in serial communication protocols. 
 
 
