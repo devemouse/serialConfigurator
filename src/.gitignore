@@ -1,0 +1,4 @@
+*.P
+*.o
+*.d
+serconf
