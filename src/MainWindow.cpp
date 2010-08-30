@@ -68,14 +68,26 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxBoxSizer* bSizer6;
 	bSizer6 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_bit_size_slider = new wxSlider( this, wxID_SLIDER, 5, 1, 63, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	m_bit_size_slider = new wxSlider( this, wxID_BS_SLIDER, 5, 1, 64, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizer6->Add( m_bit_size_slider, 1, wxALL|wxEXPAND, 5 );
 	
-	m_bit_size_label = new wxStaticText( this, wxID_ANY, wxT("00"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bit_size_label = new wxStaticText( this, wxID_ANY, wxT("BS: 00"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_bit_size_label->Wrap( -1 );
 	bSizer6->Add( m_bit_size_label, 0, wxALL, 5 );
 	
 	bSizer5->Add( bSizer6, 0, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer61;
+	bSizer61 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_bit_pos_slider = new wxSlider( this, wxID_BP_SLIDER, 5, 0, 63, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	bSizer61->Add( m_bit_pos_slider, 1, wxALL|wxEXPAND, 5 );
+	
+	m_bit_pos_label = new wxStaticText( this, wxID_ANY, wxT("BP: 00"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bit_pos_label->Wrap( -1 );
+	bSizer61->Add( m_bit_pos_label, 0, wxALL, 5 );
+	
+	bSizer5->Add( bSizer61, 0, wxEXPAND, 5 );
 	
 	bSizer1->Add( bSizer5, 1, wxEXPAND, 5 );
 	
@@ -99,6 +111,15 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_bit_size_slider->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
 }
 
 MainFrame::~MainFrame()
@@ -120,4 +141,13 @@ MainFrame::~MainFrame()
 	m_bit_size_slider->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
+	m_bit_pos_slider->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::BPS_OnScrollHdl ), NULL, this );
 }

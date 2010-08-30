@@ -1,3 +1,4 @@
+#if 0
 #include "serialConfigurator.h"
 #include "wx/panel.h"
 #include "wx/menu.h"
@@ -262,3 +263,4 @@ void SerialConfigurator::ListFiles(void)
 }
 
 
+#endif

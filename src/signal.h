@@ -1,3 +1,4 @@
+#if 0
 #include <wx/wx.h>
 #include <wx/treebook.h>
 #include "MainWindow.h"
@@ -25,3 +26,4 @@ class SerialConfigurator : public MainFrame
       void ListFiles(void);
 		wxTreebook* m_treeCtrl2;
 };
+#endif

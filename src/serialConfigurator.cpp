@@ -6,8 +6,8 @@
 #include "wx/textfile.h"
 #include "wx/msgdlg.h"
 #include "wx/dnd.h"
+#include "wx/colour.h"
 #include "home.xpm"
-
 
 
 /*-----------------------------------------------------------------------------
@@ -18,7 +18,7 @@
 {
    SetIcon(wxIcon(wxICON(home)));
 
-   wxButton * buttons[64];
+   //wxButton * buttons[64];
 
    char buf[5];
 
@@ -31,6 +31,7 @@
       buttons[i]->Connect( wxEVT_MOTION, wxMouseEventHandler( SerialConfigurator::continueDragHdl ), NULL, this );
    }
 	this->Layout();
+   defaultButtonColour = new wxColour(buttons[0]->GetBackgroundColour());
 
    // Centre();
    //wxPanel *panel = new wxPanel(this, wxID_ANY);
@@ -191,8 +192,8 @@ void SerialConfigurator::continueDragHdl( wxMouseEvent& event )
 
 void SerialConfigurator::BSS_OnScrollHdl( wxScrollEvent& event )
 {
-   char buf[5];
-   sprintf(buf,"%d ", m_bit_size_slider->GetValue());
+   char buf[10];
+   sprintf(buf,"BS: %d ", m_bit_size_slider->GetValue());
 
    m_bit_size_label->SetLabel(buf);
 
@@ -200,6 +201,30 @@ void SerialConfigurator::BSS_OnScrollHdl( wxScrollEvent& event )
 }
 
 
+void SerialConfigurator::BPS_OnScrollHdl( wxScrollEvent& event )
+{
+   char buf[10];
+   int index = m_bit_pos_slider->GetValue();
+   sprintf(buf,"BP: %d ", index);
+
+   m_bit_pos_label->SetLabel(buf);
+
+   buttons[index]->SetFocus();
+   
+   buttons[index]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
+
+   if ( index > 0 )
+   {
+      buttons[index-1]->SetBackgroundColour(*defaultButtonColour);
+   }
+
+   if ( index < (NUM_OF_BUTTONS - 1))
+   {
+      buttons[index+1]->SetBackgroundColour(*defaultButtonColour);
+   }
+
+   event.Skip();
+}
 
 void SerialConfigurator::FileSelectedEvtHdl( wxCommandEvent& event )
 {

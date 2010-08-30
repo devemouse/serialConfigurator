@@ -41,7 +41,8 @@ class MainFrame : public wxFrame
 			ID_TEXT_LINE,
 			ID_ADD_BUTTON,
 			ID_DBG_BUTTON_01,
-			wxID_SLIDER,
+			wxID_BS_SLIDER,
+			wxID_BP_SLIDER,
 		};
 		
 		wxListBox* m_filesList;
@@ -55,6 +56,8 @@ class MainFrame : public wxFrame
 		
 		wxSlider* m_bit_size_slider;
 		wxStaticText* m_bit_size_label;
+		wxSlider* m_bit_pos_slider;
+		wxStaticText* m_bit_pos_label;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void MainWindowActivatedEvtHdl( wxActivateEvent& event ){ event.Skip(); }
@@ -65,6 +68,7 @@ class MainFrame : public wxFrame
 		virtual void dbgButton01ClickEvtHdl( wxCommandEvent& event ){ event.Skip(); }
 		virtual void dbgButton02ClickEvtHdl( wxCommandEvent& event ){ event.Skip(); }
 		virtual void BSS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
+		virtual void BPS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
 		
 	
 	public:
