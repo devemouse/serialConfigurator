@@ -14,7 +14,7 @@
  *  Constructor
  *-----------------------------------------------------------------------------*/
    SerialConfigurator::SerialConfigurator(const wxString& title)
-: MainFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(500, 550))
+: MainFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 550))
 {
    SetIcon(wxIcon(wxICON(home)));
 
@@ -29,6 +29,11 @@
    }
 	this->Layout();
    defaultButtonColour = new wxColour(buttons[0]->GetBackgroundColour());
+
+   m_bit_pos_label->SetLabel(wxString::Format(wxT("BP: %d "), 5));
+   m_bit_size_label->SetLabel(wxString::Format(wxT("BS: %d "), 5));
+   clearButtons();
+   drawSignal(5,5);
 
    // Centre();
    //wxPanel *panel = new wxPanel(this, wxID_ANY);
@@ -205,7 +210,7 @@ void SerialConfigurator::drawSignal(int pos, int size)
 {
    clearButtons();
 
-   if (size + pos < NUM_OF_BUTTONS)
+   if (size + pos <= NUM_OF_BUTTONS)
    {
       for (int i = pos; i<(pos + size); i++)
       {
