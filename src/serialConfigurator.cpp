@@ -20,12 +20,9 @@
 
    //wxButton * buttons[64];
 
-   char buf[5];
-
-   for (int i=0; i<64; i++)
+   for (int i=0; i<NUM_OF_BUTTONS; i++)
    {
-      sprintf(buf,"%d", i);
-      buttons[i] = new wxButton(this, i, buf, wxDefaultPosition, wxSize(-1,-1), wxNO_BORDER);
+      buttons[i] = new wxButton(this, i, wxString::Format(wxT("%d"), i), wxDefaultPosition, wxSize(-1,-1));
       buttonsSizer->Add(buttons[i], 0, wxALL|wxEXPAND, 0);
       buttons[i]->Connect( wxEVT_LEFT_DOWN, wxCommandEventHandler( SerialConfigurator::startDragHdl ), NULL, this );
       buttons[i]->Connect( wxEVT_MOTION, wxMouseEventHandler( SerialConfigurator::continueDragHdl ), NULL, this );
@@ -163,10 +160,7 @@ void SerialConfigurator::MainWindowCloseEvtHdl( wxCloseEvent& event )
 
 void SerialConfigurator::startDragHdl( wxCommandEvent& event )
 {
-   char buf[5];
-   sprintf(buf,"\n%d ", event.GetId());
-
-   m_Text->AppendText(buf);
+   m_Text->AppendText(wxString::Format(wxT("\n%d "), event.GetId()));
 
    //wxTextDataObject textData("This text will be dragged.");
    //wxDropSource source(textData, this);
@@ -178,13 +172,9 @@ void SerialConfigurator::startDragHdl( wxCommandEvent& event )
 
 void SerialConfigurator::continueDragHdl( wxMouseEvent& event )
 {
-   if (event.Dragging()){
-
-      char buf[5];
-      sprintf(buf,"%d ", event.GetId());
-
-      m_Text->AppendText(buf);
-   }
+   //if (event.Dragging()){
+      m_Text->AppendText(wxString::Format(wxT("%d "), event.GetId()));
+   //}
 
    event.Skip();
 }
@@ -192,36 +182,53 @@ void SerialConfigurator::continueDragHdl( wxMouseEvent& event )
 
 void SerialConfigurator::BSS_OnScrollHdl( wxScrollEvent& event )
 {
-   char buf[10];
-   sprintf(buf,"BS: %d ", m_bit_size_slider->GetValue());
+   int size = m_bit_size_slider->GetValue();
+   int pos = m_bit_pos_slider->GetValue();
 
-   m_bit_size_label->SetLabel(buf);
+   m_bit_size_label->SetLabel(wxString::Format(wxT("BS: %d "), size));
+
+   drawSignal(pos,size);
 
    event.Skip();
 }
 
 
+void SerialConfigurator::clearButtons(void)
+{
+   for (int i=0; i<NUM_OF_BUTTONS; i++)
+   {
+      buttons[i]->SetBackgroundColour(*defaultButtonColour);
+   }
+}
+
+void SerialConfigurator::drawSignal(int pos, int size)
+{
+   clearButtons();
+
+   if (size + pos < NUM_OF_BUTTONS)
+   {
+      for (int i = pos; i<(pos + size); i++)
+      {
+         buttons[i]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
+      }
+   }
+   else
+   {
+      //m_bit_size_slider->SetValue(NUM_OF_BUTTONS);
+   }
+
+}
+
 void SerialConfigurator::BPS_OnScrollHdl( wxScrollEvent& event )
 {
-   char buf[10];
-   int index = m_bit_pos_slider->GetValue();
-   sprintf(buf,"BP: %d ", index);
+   int size = m_bit_size_slider->GetValue();
+   int pos = m_bit_pos_slider->GetValue();
 
-   m_bit_pos_label->SetLabel(buf);
+   m_bit_pos_label->SetLabel(wxString::Format(wxT("BP: %d "), pos));
 
-   buttons[index]->SetFocus();
-   
-   buttons[index]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
+   clearButtons();
 
-   if ( index > 0 )
-   {
-      buttons[index-1]->SetBackgroundColour(*defaultButtonColour);
-   }
-
-   if ( index < (NUM_OF_BUTTONS - 1))
-   {
-      buttons[index+1]->SetBackgroundColour(*defaultButtonColour);
-   }
+   drawSignal(pos,size);
 
    event.Skip();
 }

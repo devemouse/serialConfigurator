@@ -27,6 +27,9 @@ class SerialConfigurator : public MainFrame
       virtual void BPS_OnScrollHdl( wxScrollEvent& event );
       void KeyEvtHdl( wxKeyEvent& event );
 
+   private:
+      void clearButtons(void);
+      void drawSignal(int pos, int size);
 
    protected:
       wxArrayString files;
