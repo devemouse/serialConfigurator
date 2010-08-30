@@ -1,4 +1,4 @@
-#include "simple.h"
+#include "serialConfigurator.h"
 #include "wx/panel.h"
 #include "wx/menu.h"
 #include "wx/dir.h"
@@ -13,7 +13,7 @@
 /*-----------------------------------------------------------------------------
  *  Constructor
  *-----------------------------------------------------------------------------*/
-   Simple::Simple(const wxString& title)
+   SerialConfigurator::SerialConfigurator(const wxString& title)
 : MainFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(500, 550))
 {
    SetIcon(wxIcon(wxICON(home)));
@@ -27,8 +27,8 @@
       sprintf(buf,"%d", i);
       buttons[i] = new wxButton(this, i, buf, wxDefaultPosition, wxSize(-1,-1), wxNO_BORDER);
       buttonsSizer->Add(buttons[i], 0, wxALL|wxEXPAND, 0);
-      buttons[i]->Connect( wxEVT_LEFT_DOWN, wxCommandEventHandler( Simple::startDragHdl ), NULL, this );
-      buttons[i]->Connect( wxEVT_MOTION, wxMouseEventHandler( Simple::continueDragHdl ), NULL, this );
+      buttons[i]->Connect( wxEVT_LEFT_DOWN, wxCommandEventHandler( SerialConfigurator::startDragHdl ), NULL, this );
+      buttons[i]->Connect( wxEVT_MOTION, wxMouseEventHandler( SerialConfigurator::continueDragHdl ), NULL, this );
    }
 	this->Layout();
 
@@ -68,7 +68,7 @@
 /*-----------------------------------------------------------------------------
  *  Event Handlers
  *-----------------------------------------------------------------------------*/
-void Simple::KeyEvtHdl( wxKeyEvent& event )
+void SerialConfigurator::KeyEvtHdl( wxKeyEvent& event )
 {
    if (event.GetModifiers() == wxMOD_CONTROL )
    {
@@ -148,11 +148,11 @@ void Simple::KeyEvtHdl( wxKeyEvent& event )
    }
 }
 
-void Simple::MainWindowActivatedEvtHdl( wxActivateEvent& event )
+void SerialConfigurator::MainWindowActivatedEvtHdl( wxActivateEvent& event )
 {
 }
 
-void Simple::MainWindowCloseEvtHdl( wxCloseEvent& event )
+void SerialConfigurator::MainWindowCloseEvtHdl( wxCloseEvent& event )
 { 
    m_Text->SaveFile();
    event.Skip();
@@ -160,7 +160,7 @@ void Simple::MainWindowCloseEvtHdl( wxCloseEvent& event )
 
 
 
-void Simple::startDragHdl( wxCommandEvent& event )
+void SerialConfigurator::startDragHdl( wxCommandEvent& event )
 {
    char buf[5];
    sprintf(buf,"\n%d ", event.GetId());
@@ -175,7 +175,7 @@ void Simple::startDragHdl( wxCommandEvent& event )
       //event.Skip();
 }
 
-void Simple::continueDragHdl( wxMouseEvent& event )
+void SerialConfigurator::continueDragHdl( wxMouseEvent& event )
 {
    if (event.Dragging()){
 
@@ -192,33 +192,33 @@ void Simple::continueDragHdl( wxMouseEvent& event )
 
 
 
-void Simple::FileSelectedEvtHdl( wxCommandEvent& event )
+void SerialConfigurator::FileSelectedEvtHdl( wxCommandEvent& event )
 {
    m_Text->SaveFile();
    m_Text->LoadFile(files[m_filesList->GetSelection()]);
    event.Skip(); 
 }
 
-void Simple::ListFilesEvtHdl( wxFileDirPickerEvent& event )
+void SerialConfigurator::ListFilesEvtHdl( wxFileDirPickerEvent& event )
 {
    ListFiles();
    event.Skip(); 
 }
 
-void Simple::AddNoteEvtHdl( wxCommandEvent& event )
+void SerialConfigurator::AddNoteEvtHdl( wxCommandEvent& event )
 { 
    m_Text->AppendText(m_textLine->GetValue() + wxT("\n"));
    m_textLine->Clear();
    event.Skip(); 
 }
 
-void Simple::dbgButton01ClickEvtHdl( wxCommandEvent& event )
+void SerialConfigurator::dbgButton01ClickEvtHdl( wxCommandEvent& event )
 {
    m_filesList->Clear();
    event.Skip();
 }
 
-void Simple::dbgButton02ClickEvtHdl( wxCommandEvent& event )
+void SerialConfigurator::dbgButton02ClickEvtHdl( wxCommandEvent& event )
 {
    ///wxMessageBox( _T("DebugButton 02"), _T("DEBUG"), wxOK);
    m_Text->SaveFile();
@@ -228,7 +228,7 @@ void Simple::dbgButton02ClickEvtHdl( wxCommandEvent& event )
 /*-----------------------------------------------------------------------------
  *  Helper functinos
  *-----------------------------------------------------------------------------*/
-void Simple::ListFiles(void)
+void SerialConfigurator::ListFiles(void)
 {
    //wxMessageBox( _T("ListFiles called"), _T("info"), wxOK);
 

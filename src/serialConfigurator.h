@@ -2,10 +2,10 @@
 #include <wx/treebook.h>
 #include "MainWindow.h"
 
-class Simple : public MainFrame
+class SerialConfigurator : public MainFrame
 {
    public:
-      Simple(const wxString& title);
+      SerialConfigurator(const wxString& title);
 
       virtual void MainWindowActivatedEvtHdl( wxActivateEvent& event );
 		virtual void MainWindowCloseEvtHdl( wxCloseEvent& event );

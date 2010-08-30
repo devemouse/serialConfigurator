@@ -1,15 +1,15 @@
 #include "main.h"
-#include "simple.h"
+#include "serialConfigurator.h"
 
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()
 {
-   Simple *simple = new Simple(wxT("Simple"));
+   SerialConfigurator *serialConfigurator = new SerialConfigurator(wxT("Serial Configurator"));
 
-   this->Connect( wxID_ANY, wxEVT_KEY_DOWN, wxKeyEventHandler( Simple::KeyEvtHdl ), NULL, simple );
+   this->Connect( wxID_ANY, wxEVT_KEY_DOWN, wxKeyEventHandler( SerialConfigurator::KeyEvtHdl ), NULL, serialConfigurator );
 
-   simple->Show(true);
+   serialConfigurator->Show(true);
 
    return true;
 }
