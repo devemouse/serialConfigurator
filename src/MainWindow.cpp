@@ -65,6 +65,18 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	
 	bSizer5->Add( 0, 0, 1, wxEXPAND, 5 );
 	
+	wxBoxSizer* bSizer6;
+	bSizer6 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_bit_size_slider = new wxSlider( this, wxID_SLIDER, 5, 1, 63, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	bSizer6->Add( m_bit_size_slider, 1, wxALL|wxEXPAND, 5 );
+	
+	m_bit_size_label = new wxStaticText( this, wxID_ANY, wxT("00"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bit_size_label->Wrap( -1 );
+	bSizer6->Add( m_bit_size_label, 0, wxALL, 5 );
+	
+	bSizer5->Add( bSizer6, 0, wxEXPAND, 5 );
+	
 	bSizer1->Add( bSizer5, 1, wxEXPAND, 5 );
 	
 	this->SetSizer( bSizer1 );
@@ -78,6 +90,15 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_addButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::AddNoteEvtHdl ), NULL, this );
 	m_dbgButton01->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton01ClickEvtHdl ), NULL, this );
 	m_dbgButton02->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton02ClickEvtHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 }
 
 MainFrame::~MainFrame()
@@ -90,4 +111,13 @@ MainFrame::~MainFrame()
 	m_addButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::AddNoteEvtHdl ), NULL, this );
 	m_dbgButton01->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton01ClickEvtHdl ), NULL, this );
 	m_dbgButton02->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton02ClickEvtHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
+	m_bit_size_slider->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 }

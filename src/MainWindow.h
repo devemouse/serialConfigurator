@@ -19,6 +19,8 @@
 #include <wx/textctrl.h>
 #include <wx/button.h>
 #include <wx/sizer.h>
+#include <wx/slider.h>
+#include <wx/stattext.h>
 #include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -39,6 +41,7 @@ class MainFrame : public wxFrame
 			ID_TEXT_LINE,
 			ID_ADD_BUTTON,
 			ID_DBG_BUTTON_01,
+			wxID_SLIDER,
 		};
 		
 		wxListBox* m_filesList;
@@ -50,6 +53,8 @@ class MainFrame : public wxFrame
 		wxButton* m_dbgButton02;
 		wxGridSizer* buttonsSizer;
 		
+		wxSlider* m_bit_size_slider;
+		wxStaticText* m_bit_size_label;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void MainWindowActivatedEvtHdl( wxActivateEvent& event ){ event.Skip(); }
@@ -59,6 +64,7 @@ class MainFrame : public wxFrame
 		virtual void AddNoteEvtHdl( wxCommandEvent& event ){ event.Skip(); }
 		virtual void dbgButton01ClickEvtHdl( wxCommandEvent& event ){ event.Skip(); }
 		virtual void dbgButton02ClickEvtHdl( wxCommandEvent& event ){ event.Skip(); }
+		virtual void BSS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
 		
 	
 	public:
