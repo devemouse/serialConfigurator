@@ -1,18 +1,39 @@
+// =====================================================================================
+// 
+//       Filename:  serialConfigurator.cpp
+// 
+//    Description:  Implementation of main window.
+// 
+//        Version:  1.0
+//        Created:  2010-08-31 08:10:00
+//       Revision:  none
+//       Compiler:  g++
+// 
+//         Author:  Dariusz Synowiec (darek129), darek129@gmail.com
+// 
+// =====================================================================================
+
+
+// #####   HEADER FILE INCLUDES   ###################################################
+
 #include "serialConfigurator.h"
-#include "wx/panel.h"
-#include "wx/menu.h"
-#include "wx/dir.h"
-#include "wx/filename.h"
-#include "wx/textfile.h"
-#include "wx/msgdlg.h"
-#include "wx/dnd.h"
-#include "wx/colour.h"
+#include <wx/wx.h>
+#include <wx/panel.h>
+#include <wx/menu.h>
+#include <wx/dir.h>
+#include <wx/filename.h>
+#include <wx/textfile.h>
+#include <wx/msgdlg.h>
+#include <wx/dnd.h>
+#include <wx/colour.h>
 #include "home.xpm"
 
 
-/*-----------------------------------------------------------------------------
- *  Constructor
- *-----------------------------------------------------------------------------*/
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  SerialConfigurator
+// Description:  COnstructor
+//--------------------------------------------------------------------------------------
    SerialConfigurator::SerialConfigurator(const wxString& title)
 : MainFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 550))
 {
@@ -20,14 +41,23 @@
 
    //wxButton * buttons[64];
 
+	wxGridSizer * buttonsSizer2 = new wxGridSizer( 10, 10, 0, 0 );
+	buttonsSizer2->SetMinSize( wxSize( 80,80 ) ); 
+	m_B->SetSizer( buttonsSizer2 );
+
    for (int i=0; i<NUM_OF_BUTTONS; i++)
    {
       buttons[i] = new wxButton(this, i, wxString::Format(wxT("%d"), i), wxDefaultPosition, wxSize(-1,-1));
-      buttonsSizer->Add(buttons[i], 0, wxALL|wxEXPAND, 0);
+      buttonsSizer2->Add(buttons[i], 0, wxALL|wxEXPAND, 0);
       buttons[i]->Connect( wxEVT_LEFT_DOWN, wxCommandEventHandler( SerialConfigurator::startDragHdl ), NULL, this );
       buttons[i]->Connect( wxEVT_MOTION, wxMouseEventHandler( SerialConfigurator::continueDragHdl ), NULL, this );
    }
-	this->Layout();
+
+	m_B->SetSizer( buttonsSizer2 );
+	m_B->Layout();
+	buttonsSizer2->Fit( m_B );
+
+   this->Layout();
    defaultButtonColour = new wxColour(buttons[0]->GetBackgroundColour());
 
    m_bit_pos_label->SetLabel(wxString::Format(wxT("BP: %d "), 5));
@@ -46,16 +76,16 @@
 
    //RegisterHotKey(0x5555, wxMOD_WIN, 'I');
 
-//RegisterHotKey( NULL, 1, wxMOD_NOREPEAT, 0x49);  //0x49 is 'I'
-   
+   //RegisterHotKey( NULL, 1, wxMOD_NOREPEAT, 0x49);  //0x49 is 'I'
+
    //const wxTreeItemId RootNode = m_treeCtrl1->AddRoot("root");
    //m_treeCtrl1->AppendItem(RootNode, "sub1");
    //m_treeCtrl1->AppendItem(RootNode, "sub2");
    //m_treeCtrl1->AppendItem(RootNode, "sub3");
-   
-	//m_treeCtrl2 = new wxTreebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE );
 
-	//this->GetSizer()->Add( m_treeCtrl2, 1, wxALL|wxEXPAND, 5 );
+   //m_treeCtrl2 = new wxTreebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE );
+
+   //this->GetSizer()->Add( m_treeCtrl2, 1, wxALL|wxEXPAND, 5 );
 
    //wxWindow *page_p = NULL;
    //m_treeCtrl2->AddPage(page_p, "Page 1");
@@ -66,11 +96,19 @@
    //ListFiles();
    //m_Text->LoadFile(files[m_filesList->GetSelection()]);
 }
-   //m_textLine->SetFocus();
+//m_textLine->SetFocus();
+
+
 
 /*-----------------------------------------------------------------------------
  *  Event Handlers
  *-----------------------------------------------------------------------------*/
+
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  KeyEvtHdl
+// Description:  Handles keyboard events
+//--------------------------------------------------------------------------------------
 void SerialConfigurator::KeyEvtHdl( wxKeyEvent& event )
 {
    if (event.GetModifiers() == wxMOD_CONTROL )
@@ -151,10 +189,21 @@ void SerialConfigurator::KeyEvtHdl( wxKeyEvent& event )
    }
 }
 
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  MainWindowActivatedEvtHdl
+// Description:  TBD
+//--------------------------------------------------------------------------------------
 void SerialConfigurator::MainWindowActivatedEvtHdl( wxActivateEvent& event )
 {
 }
 
+
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  MainWindowCloseEvtHdl
+// Description:  Saves the file just before closing the window.
+//--------------------------------------------------------------------------------------
 void SerialConfigurator::MainWindowCloseEvtHdl( wxCloseEvent& event )
 { 
    m_Text->SaveFile();
@@ -163,6 +212,11 @@ void SerialConfigurator::MainWindowCloseEvtHdl( wxCloseEvent& event )
 
 
 
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  startDragHdl
+// Description:  Event occurs when dragging was started.
+//--------------------------------------------------------------------------------------
 void SerialConfigurator::startDragHdl( wxCommandEvent& event )
 {
    m_Text->AppendText(wxString::Format(wxT("\n%d "), event.GetId()));
@@ -172,19 +226,31 @@ void SerialConfigurator::startDragHdl( wxCommandEvent& event )
 
    //wxDragResult result = source.DoDragDrop(TRUE);
 
-      //event.Skip();
+   //event.Skip();
 }
 
+
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  continueDragHdl
+// Description:  Handler is connected to Mouse motion event. It is supused to move signal in
+// message GUI
+//--------------------------------------------------------------------------------------
 void SerialConfigurator::continueDragHdl( wxMouseEvent& event )
 {
    //if (event.Dragging()){
-      m_Text->AppendText(wxString::Format(wxT("%d "), event.GetId()));
+   m_Text->AppendText(wxString::Format(wxT("%d "), event.GetId()));
    //}
 
    event.Skip();
 }
 
 
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  BSS_OnScrollHdl
+// Description:  Bit Size Slider on scroll handler, updates label and message GUI.
+//--------------------------------------------------------------------------------------
 void SerialConfigurator::BSS_OnScrollHdl( wxScrollEvent& event )
 {
    int size = m_bit_size_slider->GetValue();
@@ -198,32 +264,11 @@ void SerialConfigurator::BSS_OnScrollHdl( wxScrollEvent& event )
 }
 
 
-void SerialConfigurator::clearButtons(void)
-{
-   for (int i=0; i<NUM_OF_BUTTONS; i++)
-   {
-      buttons[i]->SetBackgroundColour(*defaultButtonColour);
-   }
-}
-
-void SerialConfigurator::drawSignal(int pos, int size)
-{
-   clearButtons();
-
-   if (size + pos <= NUM_OF_BUTTONS)
-   {
-      for (int i = pos; i<(pos + size); i++)
-      {
-         buttons[i]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
-      }
-   }
-   else
-   {
-      //m_bit_size_slider->SetValue(NUM_OF_BUTTONS);
-   }
-
-}
-
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  BPS_OnScrollHdl
+// Description:  Bit Position Slider on scroll handler, updates label and message GUI.
+//--------------------------------------------------------------------------------------
 void SerialConfigurator::BPS_OnScrollHdl( wxScrollEvent& event )
 {
    int size = m_bit_size_slider->GetValue();
@@ -237,6 +282,8 @@ void SerialConfigurator::BPS_OnScrollHdl( wxScrollEvent& event )
 
    event.Skip();
 }
+
+
 
 void SerialConfigurator::FileSelectedEvtHdl( wxCommandEvent& event )
 {
@@ -274,6 +321,7 @@ void SerialConfigurator::dbgButton02ClickEvtHdl( wxCommandEvent& event )
 /*-----------------------------------------------------------------------------
  *  Helper functinos
  *-----------------------------------------------------------------------------*/
+
 void SerialConfigurator::ListFiles(void)
 {
    //wxMessageBox( _T("ListFiles called"), _T("info"), wxOK);
@@ -298,4 +346,40 @@ void SerialConfigurator::ListFiles(void)
    m_filesList->SetSelection(0);
 }
 
+
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  clearButtons
+// Description:  Sets the colour of message gui to default one.
+//--------------------------------------------------------------------------------------
+void SerialConfigurator::clearButtons(void)
+{
+   for (int i=0; i<NUM_OF_BUTTONS; i++)
+   {
+      buttons[i]->SetBackgroundColour(*defaultButtonColour);
+   }
+}
+
+//--------------------------------------------------------------------------------------
+//       Class:  SerialConfigurator
+//      Method:  drawSignal
+// Description:  draws signal from start position of given size
+//--------------------------------------------------------------------------------------
+void SerialConfigurator::drawSignal(int pos, int size)
+{
+   clearButtons();
+
+   if (size + pos <= NUM_OF_BUTTONS)
+   {
+      for (int i = pos; i<(pos + size); i++)
+      {
+         buttons[i]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
+      }
+   }
+   else
+   {
+      //m_bit_size_slider->SetValue(NUM_OF_BUTTONS);
+   }
+
+}
 

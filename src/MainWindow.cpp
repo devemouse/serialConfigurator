@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 21 2009)
+// C++ code generated with wxFormBuilder (version Apr 16 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -12,7 +12,7 @@
 MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW ) );
+	this->SetBackgroundColour( wxColour( 0, 255, 255 ) );
 	
 	wxBoxSizer* bSizer1;
 	bSizer1 = new wxBoxSizer( wxHORIZONTAL );
@@ -60,13 +60,21 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxVERTICAL );
 	
-	buttonsSizer = new wxGridSizer( 8, 8, 0, 0 );
+	m_B = new MessageGUI(this );
+	m_B->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVECAPTION ) );
+	
+	bSizer5->Add( m_B, 1, wxALL|wxEXPAND, 5 );
+	
+	buttonsSizer = new wxGridSizer( 10, 10, 0, 0 );
 	
 	buttonsSizer->SetMinSize( wxSize( 80,80 ) ); 
-	bSizer5->Add( buttonsSizer, 3, wxEXPAND, 1 );
+	m_button7 = new wxButton( this, wxID_ANY, wxT("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
+	buttonsSizer->Add( m_button7, 0, wxALL, 5 );
 	
+	m_button8 = new wxButton( this, wxID_ANY, wxT("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
+	buttonsSizer->Add( m_button8, 0, wxALL, 5 );
 	
-	bSizer5->Add( 0, 0, 1, wxEXPAND, 5 );
+	bSizer5->Add( buttonsSizer, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer6;
 	bSizer6 = new wxBoxSizer( wxHORIZONTAL );

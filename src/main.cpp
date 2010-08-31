@@ -1,5 +1,24 @@
+// =====================================================================================
+// 
+//       Filename:  main.cpp
+// 
+//    Description:  Main application. Creates main window.
+// 
+//        Version:  1.0
+//        Created:  2010-08-31 08:08:47
+//       Revision:  none
+//       Compiler:  g++
+// 
+//         Author:  Dariusz Synowiec (darek129), darek129@gmail.com
+// 
+// =====================================================================================
+
+// #####   HEADER FILE INCLUDES   ###################################################
+
 #include "main.h"
 #include "serialConfigurator.h"
+
+// #####   FUNCTION DEFINITIONS  -  EXPORTED FUNCTIONS   ############################
 
 IMPLEMENT_APP(MyApp)
 

@@ -1,13 +1,25 @@
 #ifndef  serialconfigurator_INC
 #define  serialconfigurator_INC
-#include <wx/wx.h>
-#include <wx/treebook.h>
+
+// #####   HEADER FILE INCLUDES   ###################################################
 #include "MainWindow.h"
 
+
+// #####   MACROS  -  LOCAL TO THIS SOURCE FILE   ###################################
 #define NUM_OF_BUTTONS 64
 
+// #####   PROTOTYPES  -  LOCAL TO THIS SOURCE FILE   ###############################
 class wxButton;
 class wxColour;
+class wxTreebook;
+class wxActivateEvent;
+class wxCloseEvent;
+class wxCommandEvent;
+class wxFileDirPickerEvent;
+class wxMouseEvent;
+class wxScrollEvent;
+class wxKeyEvent;
+
 
 class SerialConfigurator : public MainFrame
 {

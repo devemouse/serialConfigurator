@@ -10,6 +10,7 @@ OBJS = $(sort \
 		 serialConfigurator.o \
 		 MainWindow.o \
 		 signal.o \
+		 MessageGUI.o \
 )
 
 
@@ -17,8 +18,11 @@ OBJS = $(sort \
 
 all: $(TARGET)
 
-$(TARGET): main.o serialConfigurator.o MainWindow.o signal.o 
+$(TARGET): $(OBJS)
 	g++ -o $(TARGET) $(OBJS) $(INCLUDE) $(OPTS)
+
+
+rebuild: clean all
 
 
 %.o: %.cpp
@@ -33,5 +37,5 @@ include $(SRCS:.c=.P)
 clean:
 	rm -rf *.P *.o $(TARGET)
 
-.PHONY: clean
+.PHONY: clean rebuild
 
