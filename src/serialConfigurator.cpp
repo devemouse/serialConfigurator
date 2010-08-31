@@ -43,22 +43,22 @@
 
 	wxGridSizer * buttonsSizer2 = new wxGridSizer( 10, 10, 0, 0 );
 	buttonsSizer2->SetMinSize( wxSize( 80,80 ) ); 
-	m_B->SetSizer( buttonsSizer2 );
+	//m_B->SetSizer( buttonsSizer2 );
 
-   for (int i=0; i<NUM_OF_BUTTONS; i++)
-   {
-      buttons[i] = new wxButton(this, i, wxString::Format(wxT("%d"), i), wxDefaultPosition, wxSize(-1,-1));
-      buttonsSizer2->Add(buttons[i], 0, wxALL|wxEXPAND, 0);
-      buttons[i]->Connect( wxEVT_LEFT_DOWN, wxCommandEventHandler( SerialConfigurator::startDragHdl ), NULL, this );
-      buttons[i]->Connect( wxEVT_MOTION, wxMouseEventHandler( SerialConfigurator::continueDragHdl ), NULL, this );
-   }
+   //for (int i=0; i<NUM_OF_BUTTONS; i++)
+   //{
+      //buttons[i] = new wxButton(this, i, wxString::Format(wxT("%d"), i), wxDefaultPosition, wxSize(-1,-1));
+      //buttonsSizer2->Add(buttons[i], 0, wxALL|wxEXPAND, 0);
+      //buttons[i]->Connect( wxEVT_LEFT_DOWN, wxCommandEventHandler( SerialConfigurator::startDragHdl ), NULL, this );
+      //buttons[i]->Connect( wxEVT_MOTION, wxMouseEventHandler( SerialConfigurator::continueDragHdl ), NULL, this );
+   //}
 
-	m_B->SetSizer( buttonsSizer2 );
-	m_B->Layout();
-	buttonsSizer2->Fit( m_B );
+	//m_B->SetSizer( buttonsSizer2 );
+	//m_B->Layout();
+	//buttonsSizer2->Fit( m_B );
 
    this->Layout();
-   defaultButtonColour = new wxColour(buttons[0]->GetBackgroundColour());
+   //defaultButtonColour = new wxColour(buttons[0]->GetBackgroundColour());
 
    m_bit_pos_label->SetLabel(wxString::Format(wxT("BP: %d "), 5));
    m_bit_size_label->SetLabel(wxString::Format(wxT("BS: %d "), 5));
@@ -356,7 +356,7 @@ void SerialConfigurator::clearButtons(void)
 {
    for (int i=0; i<NUM_OF_BUTTONS; i++)
    {
-      buttons[i]->SetBackgroundColour(*defaultButtonColour);
+      //buttons[i]->SetBackgroundColour(*defaultButtonColour);
    }
 }
 
@@ -373,7 +373,7 @@ void SerialConfigurator::drawSignal(int pos, int size)
    {
       for (int i = pos; i<(pos + size); i++)
       {
-         buttons[i]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
+         //buttons[i]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
       }
    }
    else

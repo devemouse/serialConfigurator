@@ -60,10 +60,31 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxVERTICAL );
 	
-	m_B = new MessageGUI(this );
-	m_B->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVECAPTION ) );
+	m_grid1 = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	
-	bSizer5->Add( m_B, 1, wxALL|wxEXPAND, 5 );
+	// Grid
+	m_grid1->CreateGrid( 5, 5 );
+	m_grid1->EnableEditing( true );
+	m_grid1->EnableGridLines( true );
+	m_grid1->EnableDragGridSize( false );
+	m_grid1->SetMargins( 0, 0 );
+	
+	// Columns
+	m_grid1->EnableDragColMove( false );
+	m_grid1->EnableDragColSize( true );
+	m_grid1->SetColLabelSize( 30 );
+	m_grid1->SetColLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
+	
+	// Rows
+	m_grid1->EnableDragRowSize( true );
+	m_grid1->SetRowLabelSize( 80 );
+	m_grid1->SetRowLabelAlignment( wxALIGN_CENTRE, wxALIGN_CENTRE );
+	
+	// Label Appearance
+	
+	// Cell Defaults
+	m_grid1->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer5->Add( m_grid1, 2, wxALL, 5 );
 	
 	buttonsSizer = new wxGridSizer( 10, 10, 0, 0 );
 	
@@ -73,6 +94,9 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	
 	m_button8 = new wxButton( this, wxID_ANY, wxT("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
 	buttonsSizer->Add( m_button8, 0, wxALL, 5 );
+	
+	m_button87 = new wxButton( this, wxID_ANY, wxT("MyButton"), wxDefaultPosition, wxDefaultSize, 0 );
+	buttonsSizer->Add( m_button87, 0, wxALL, 5 );
 	
 	bSizer5->Add( buttonsSizer, 0, wxEXPAND, 5 );
 	

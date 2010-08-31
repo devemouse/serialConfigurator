@@ -20,7 +20,7 @@
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/treectrl.h>
-#include "MessageGUI.h"
+#include <wx/grid.h>
 #include <wx/slider.h>
 #include <wx/stattext.h>
 #include <wx/frame.h>
@@ -56,10 +56,11 @@ class MainFrame : public wxFrame
 		wxButton* m_dbgButton01;
 		wxButton* m_dbgButton02;
 		wxTreeCtrl* m_mainTree;
-		MessageGUI *m_B;
+		wxGrid* m_grid1;
 		wxGridSizer* buttonsSizer;
 		wxButton* m_button7;
 		wxButton* m_button8;
+		wxButton* m_button87;
 		wxSlider* m_bit_size_slider;
 		wxStaticText* m_bit_size_label;
 		wxSlider* m_bit_pos_slider;
