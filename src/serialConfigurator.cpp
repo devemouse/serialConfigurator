@@ -35,6 +35,14 @@
    clearButtons();
    drawSignal(5,5);
 
+
+   wxTreeItemId root = m_mainTree->AddRoot(wxT("signals"));
+   m_mainTree->AppendItem(root, wxT("signal1"));
+   m_mainTree->AppendItem(root, wxT("signal2"));
+   m_mainTree->AppendItem(root, wxT("signal3"));
+
+
+
    // Centre();
    //wxPanel *panel = new wxPanel(this, wxID_ANY);
    //wxMenuBar *mbar = new wxMenuBar;
@@ -172,7 +180,7 @@ void SerialConfigurator::startDragHdl( wxCommandEvent& event )
 
    //wxDragResult result = source.DoDragDrop(TRUE);
 
-      //event.Skip();
+   event.Skip();
 }
 
 void SerialConfigurator::continueDragHdl( wxMouseEvent& event )

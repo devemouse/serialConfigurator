@@ -55,7 +55,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	bSizer1->Add( bSizer3, 0, wxEXPAND, 5 );
 	
 	m_mainTree = new wxTreeCtrl( this, wxID_TREE, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE|wxTR_HAS_BUTTONS );
-	bSizer1->Add( m_mainTree, 0, wxALL, 5 );
+	bSizer1->Add( m_mainTree, 2, wxALL|wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxVERTICAL );
