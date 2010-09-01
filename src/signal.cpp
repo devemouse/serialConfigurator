@@ -1,3 +1,29 @@
+#include "signal.h"
+
+
+
+
+
+Signal::Signal()
+{
+}
+
+Signal::Signal(int _bit_size, int _bit_position)
+{
+
+   Options["BitSize"] = _bit_size;
+   Options["BitPosition"] = _bit_position;
+}
+
+
+
+Signal::~Signal()
+{
+
+}
+
+
+
 #if 0
 #include "serialConfigurator.h"
 #include "wx/panel.h"
@@ -264,3 +290,4 @@ void SerialConfigurator::ListFiles(void)
 
 
 #endif
+

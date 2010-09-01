@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 21 2009)
+// C++ code generated with wxFormBuilder (version Apr 16 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -60,37 +60,78 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxBoxSizer* bSizer5;
 	bSizer5 = new wxBoxSizer( wxVERTICAL );
 	
-	buttonsSizer = new wxGridSizer( 8, 8, 0, 0 );
+	m_splitter1 = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
+	m_splitter1->SetSashGravity( 0 );
+	m_splitter1->Connect( wxEVT_IDLE, wxIdleEventHandler( MainFrame::m_splitter1OnIdle ), NULL, this );
+	m_panel2 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer8;
+	bSizer8 = new wxBoxSizer( wxVERTICAL );
 	
-	buttonsSizer->SetMinSize( wxSize( 80,80 ) ); 
-	bSizer5->Add( buttonsSizer, 3, wxEXPAND, 1 );
+	m_Properties = new wxTreeCtrl( m_panel2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT );
+	bSizer8->Add( m_Properties, 2, wxALL|wxEXPAND, 5 );
 	
+	m_panel2->SetSizer( bSizer8 );
+	m_panel2->Layout();
+	bSizer8->Fit( m_panel2 );
+	m_panel4 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxBoxSizer* bSizer10;
+	bSizer10 = new wxBoxSizer( wxVERTICAL );
 	
-	bSizer5->Add( 0, 0, 1, wxEXPAND, 5 );
+	m_textCtrl2 = new wxTextCtrl( m_panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer10->Add( m_textCtrl2, 0, wxALL|wxEXPAND, 5 );
+	
+	m_textCtrl3 = new wxTextCtrl( m_panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer10->Add( m_textCtrl3, 0, wxALL|wxEXPAND, 5 );
+	
+	m_textCtrl4 = new wxTextCtrl( m_panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer10->Add( m_textCtrl4, 0, wxALL|wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer6;
 	bSizer6 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_bit_size_slider = new wxSlider( this, wxID_BS_SLIDER, 5, 1, 64, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	m_bit_size_slider = new wxSlider( m_panel4, wxID_BS_SLIDER, 5, 1, 64, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizer6->Add( m_bit_size_slider, 1, wxALL|wxEXPAND, 5 );
 	
-	m_bit_size_label = new wxStaticText( this, wxID_ANY, wxT("BS: 00"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bit_size_label = new wxStaticText( m_panel4, wxID_ANY, wxT("BS: 00"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_bit_size_label->Wrap( -1 );
 	bSizer6->Add( m_bit_size_label, 0, wxALL, 5 );
 	
-	bSizer5->Add( bSizer6, 0, wxEXPAND, 5 );
+	bSizer10->Add( bSizer6, 0, wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer61;
 	bSizer61 = new wxBoxSizer( wxHORIZONTAL );
 	
-	m_bit_pos_slider = new wxSlider( this, wxID_BP_SLIDER, 5, 0, 63, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	m_bit_pos_slider = new wxSlider( m_panel4, wxID_BP_SLIDER, 5, 0, 63, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizer61->Add( m_bit_pos_slider, 1, wxALL|wxEXPAND, 5 );
 	
-	m_bit_pos_label = new wxStaticText( this, wxID_ANY, wxT("BP: 00"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bit_pos_label = new wxStaticText( m_panel4, wxID_ANY, wxT("BP: 00"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_bit_pos_label->Wrap( -1 );
 	bSizer61->Add( m_bit_pos_label, 0, wxALL, 5 );
 	
-	bSizer5->Add( bSizer61, 0, wxEXPAND, 5 );
+	bSizer10->Add( bSizer61, 0, wxEXPAND, 5 );
+	
+	wxStaticBoxSizer* sbSizer2;
+	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( m_panel4, wxID_ANY, wxT("Description") ), wxVERTICAL );
+	
+	m_optionDescription = new wxStaticText( m_panel4, wxID_ANY, wxT("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam condimentum leo non libero volutpat molestie. Nullam vitae ante ullamcorper velit tempor volutpat eget eu sem. Nulla id velit nulla, id molestie velit. Aliquam erat volutpat. Nulla consectetur nibh quis dolor tincidunt at lobortis sem pretium. Integer ligula neque, semper vel pellentesque sit amet, gravida accumsan diam. Integer enim nisi, volutpat a consequat quis, luctus nec tortor. Nam a mollis nisl. Duis massa tortor, tempus accumsan porta vitae, sodales ac odio. Proin eget mauris purus, sed facilisis nibh. Suspendisse rhoncus leo ac massa consectetur eu rhoncus odio tempor. Nulla ullamcorper fringilla enim. Nam eleifend tempor dolor, nec sagittis lorem lobortis ut. Morbi est eros, feugiat ac placerat ac, lacinia vel tortor. Vivamus commodo, mauris lobortis imperdiet fringilla, nulla metus pretium velit, a mollis urna ipsum quis augue.\n"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_optionDescription->Wrap( -1 );
+	sbSizer2->Add( m_optionDescription, 1, wxALL|wxEXPAND, 5 );
+	
+	bSizer10->Add( sbSizer2, 1, wxEXPAND, 5 );
+	
+	m_genericSlider = new wxSlider( m_panel4, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	bSizer10->Add( m_genericSlider, 0, wxALL|wxEXPAND, 5 );
+	
+	m_panel4->SetSizer( bSizer10 );
+	m_panel4->Layout();
+	bSizer10->Fit( m_panel4 );
+	m_splitter1->SplitVertically( m_panel2, m_panel4, 150 );
+	bSizer5->Add( m_splitter1, 4, wxEXPAND, 5 );
+	
+	buttonsSizer = new wxGridSizer( 8, 8, 0, 0 );
+	
+	buttonsSizer->SetMinSize( wxSize( 600,600 ) ); 
+	bSizer5->Add( buttonsSizer, 3, wxALIGN_CENTER|wxEXPAND|wxFIXED_MINSIZE|wxSHAPED, 1 );
 	
 	bSizer1->Add( bSizer5, 5, wxEXPAND, 5 );
 	
@@ -106,6 +147,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_dbgButton01->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton01ClickEvtHdl ), NULL, this );
 	m_dbgButton02->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton02ClickEvtHdl ), NULL, this );
 	m_mainTree->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( MainFrame::TreeSelChangedHdl ), NULL, this );
+	m_Properties->Connect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( MainFrame::PropTreeSelChangedHdl ), NULL, this );
 	m_bit_size_slider->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
@@ -137,6 +179,7 @@ MainFrame::~MainFrame()
 	m_dbgButton01->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton01ClickEvtHdl ), NULL, this );
 	m_dbgButton02->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::dbgButton02ClickEvtHdl ), NULL, this );
 	m_mainTree->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( MainFrame::TreeSelChangedHdl ), NULL, this );
+	m_Properties->Disconnect( wxEVT_COMMAND_TREE_SEL_CHANGED, wxTreeEventHandler( MainFrame::PropTreeSelChangedHdl ), NULL, this );
 	m_bit_size_slider->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );
 	m_bit_size_slider->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::BSS_OnScrollHdl ), NULL, this );

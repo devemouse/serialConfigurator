@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 21 2009)
+// C++ code generated with wxFormBuilder (version Apr 16 2008)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -20,8 +20,11 @@
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/treectrl.h>
+#include <wx/panel.h>
 #include <wx/slider.h>
 #include <wx/stattext.h>
+#include <wx/statbox.h>
+#include <wx/splitter.h>
 #include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -55,30 +58,44 @@ class MainFrame : public wxFrame
 		wxButton* m_dbgButton01;
 		wxButton* m_dbgButton02;
 		wxTreeCtrl* m_mainTree;
-		wxGridSizer* buttonsSizer;
-		
+		wxSplitterWindow* m_splitter1;
+		wxPanel* m_panel2;
+		wxTreeCtrl* m_Properties;
+		wxPanel* m_panel4;
+		wxTextCtrl* m_textCtrl2;
+		wxTextCtrl* m_textCtrl3;
+		wxTextCtrl* m_textCtrl4;
 		wxSlider* m_bit_size_slider;
 		wxStaticText* m_bit_size_label;
 		wxSlider* m_bit_pos_slider;
 		wxStaticText* m_bit_pos_label;
+		wxStaticText* m_optionDescription;
+		wxSlider* m_genericSlider;
+		wxGridSizer* buttonsSizer;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void MainWindowActivatedEvtHdl( wxActivateEvent& event ) { event.Skip(); }
-		virtual void MainWindowCloseEvtHdl( wxCloseEvent& event ) { event.Skip(); }
-		virtual void FileSelectedEvtHdl( wxCommandEvent& event ) { event.Skip(); }
-		virtual void ListFilesEvtHdl( wxFileDirPickerEvent& event ) { event.Skip(); }
-		virtual void AddNoteEvtHdl( wxCommandEvent& event ) { event.Skip(); }
-		virtual void dbgButton01ClickEvtHdl( wxCommandEvent& event ) { event.Skip(); }
-		virtual void dbgButton02ClickEvtHdl( wxCommandEvent& event ) { event.Skip(); }
-		virtual void TreeSelChangedHdl( wxTreeEvent& event ) { event.Skip(); }
-		virtual void BSS_OnScrollHdl( wxScrollEvent& event ) { event.Skip(); }
-		virtual void BPS_OnScrollHdl( wxScrollEvent& event ) { event.Skip(); }
+		virtual void MainWindowActivatedEvtHdl( wxActivateEvent& event ){ event.Skip(); }
+		virtual void MainWindowCloseEvtHdl( wxCloseEvent& event ){ event.Skip(); }
+		virtual void FileSelectedEvtHdl( wxCommandEvent& event ){ event.Skip(); }
+		virtual void ListFilesEvtHdl( wxFileDirPickerEvent& event ){ event.Skip(); }
+		virtual void AddNoteEvtHdl( wxCommandEvent& event ){ event.Skip(); }
+		virtual void dbgButton01ClickEvtHdl( wxCommandEvent& event ){ event.Skip(); }
+		virtual void dbgButton02ClickEvtHdl( wxCommandEvent& event ){ event.Skip(); }
+		virtual void TreeSelChangedHdl( wxTreeEvent& event ){ event.Skip(); }
+		virtual void PropTreeSelChangedHdl( wxTreeEvent& event ){ event.Skip(); }
+		virtual void BSS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
+		virtual void BPS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
 		
 	
 	public:
-		
-		MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("MainFrame"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1131,828 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("MainFrame"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 857,828 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		~MainFrame();
+		void m_splitter1OnIdle( wxIdleEvent& )
+		{
+		m_splitter1->SetSashPosition( 150 );
+		m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( MainFrame::m_splitter1OnIdle ), NULL, this );
+		}
+		
 	
 };
 

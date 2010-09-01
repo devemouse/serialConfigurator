@@ -8,6 +8,7 @@
 #include "wx/dnd.h"
 #include "wx/colour.h"
 #include "home.xpm"
+#include "signal.h"
 
 
 /*-----------------------------------------------------------------------------
@@ -37,11 +38,40 @@
 
 
    wxTreeItemId root = m_mainTree->AddRoot(wxT("signals"));
-   m_mainTree->AppendItem(root, wxT("signal1"));
-   m_mainTree->AppendItem(root, wxT("signal2"));
-   m_mainTree->AppendItem(root, wxT("signal3"));
+   m_mainTree->AppendItem(root, wxT("signal0"),-1,-1, new Signal(0, 2, 0));
+   m_mainTree->AppendItem(root, wxT("signal1"),-1,-1, new Signal(1, 2, 2));
+   m_mainTree->AppendItem(root, wxT("signal2"),-1,-1, new Signal(2, 2, 4));
+   m_mainTree->AppendItem(root, wxT("signal3"),-1,-1, new Signal(3, 2, 6));
+   m_mainTree->AppendItem(root, wxT("signal4"),-1,-1, new Signal(4, 2, 8));
 
+   m_mainTree->ExpandAll();
 
+   
+   root = m_Properties->AddRoot(wxT("Properties"));
+
+   m_Properties->AppendItem(root, wxT("Notification"));
+   m_Properties->AppendItem(root, wxT("ErrorNotification"));
+   m_Properties->AppendItem(root, wxT("InvalidNotification"));
+   m_Properties->AppendItem(root, wxT("TimeoutNotification"));
+   m_Properties->AppendItem(root, wxT("IPdulRef"));
+   m_Properties->AppendItem(root, wxT("Filter"));
+   m_Properties->AppendItem(root, wxT("SignalInitValue"));
+   m_Properties->AppendItem(root, wxT("SignalDataInvalidValue"));
+   m_Properties->AppendItem(root, wxT("SignalType"));
+   m_Properties->AppendItem(root, wxT("SignalEndianess"));
+   m_Properties->AppendItem(root, wxT("DataInvalidAction"));
+   m_Properties->AppendItem(root, wxT("TransferProperty"));
+   m_Properties->AppendItem(root, wxT("HandleId"));
+   m_Properties->AppendItem(root, wxT("RxDataTimeoutAction"));
+   m_Properties->AppendItem(root, wxT("TimeoutFactor"));
+   m_Properties->AppendItem(root, wxT("FirstTimeoutFactor"));
+   m_Properties->AppendItem(root, wxT("BitPosition"));
+   m_Properties->AppendItem(root, wxT("BitSize"));
+   m_Properties->AppendItem(root, wxT("SignalLength"));
+   m_Properties->AppendItem(root, wxT("UpdateBitPosition"));
+
+   m_Properties->ExpandAll();
+   m_Properties->SortChildren(root);
 
    // Centre();
    //wxPanel *panel = new wxPanel(this, wxID_ANY);
@@ -73,8 +103,8 @@
 
    //ListFiles();
    //m_Text->LoadFile(files[m_filesList->GetSelection()]);
-}
    //m_textLine->SetFocus();
+}
 
 /*-----------------------------------------------------------------------------
  *  Event Handlers
@@ -159,8 +189,32 @@ void SerialConfigurator::KeyEvtHdl( wxKeyEvent& event )
    }
 }
 
+
+void SerialConfigurator::TreeSelChangedHdl( wxTreeEvent& event )
+{
+   Signal * tempSignal = dynamic_cast<Signal *>(m_mainTree->GetItemData(event.GetItem()));
+
+   if (tempSignal != NULL)
+   {
+      m_Text->AppendText(wxString::Format(wxT("\n%d "), tempSignal->HandleId));
+
+      m_bit_size_slider->SetValue(tempSignal->GetBitSize());
+      m_bit_pos_slider->SetValue(tempSignal->GetBitPosition());
+      clearButtons();
+      drawSignal(tempSignal->GetBitPosition(), tempSignal->GetBitSize());
+   }
+
+   event.Skip();
+}
+
+void SerialConfigurator::PropTreeSelChangedHdl( wxTreeEvent& event )
+{ 
+   event.Skip(); 
+}
+
 void SerialConfigurator::MainWindowActivatedEvtHdl( wxActivateEvent& event )
 {
+   event.Skip();
 }
 
 void SerialConfigurator::MainWindowCloseEvtHdl( wxCloseEvent& event )
@@ -200,36 +254,16 @@ void SerialConfigurator::BSS_OnScrollHdl( wxScrollEvent& event )
 
    m_bit_size_label->SetLabel(wxString::Format(wxT("BS: %d "), size));
 
-   drawSignal(pos,size);
+   Signal * tempSignal = dynamic_cast<Signal *>(m_mainTree->GetItemData(m_mainTree->GetSelection()));
+
+   if (tempSignal != NULL)
+   {
+      tempSignal->SetBitSize(size);
+
+      drawSignal(pos,size);
+   }
 
    event.Skip();
-}
-
-
-void SerialConfigurator::clearButtons(void)
-{
-   for (int i=0; i<NUM_OF_BUTTONS; i++)
-   {
-      buttons[i]->SetBackgroundColour(*defaultButtonColour);
-   }
-}
-
-void SerialConfigurator::drawSignal(int pos, int size)
-{
-   clearButtons();
-
-   if (size + pos <= NUM_OF_BUTTONS)
-   {
-      for (int i = pos; i<(pos + size); i++)
-      {
-         buttons[i]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
-      }
-   }
-   else
-   {
-      //m_bit_size_slider->SetValue(NUM_OF_BUTTONS);
-   }
-
 }
 
 void SerialConfigurator::BPS_OnScrollHdl( wxScrollEvent& event )
@@ -239,9 +273,16 @@ void SerialConfigurator::BPS_OnScrollHdl( wxScrollEvent& event )
 
    m_bit_pos_label->SetLabel(wxString::Format(wxT("BP: %d "), pos));
 
-   clearButtons();
+   Signal * tempSignal = dynamic_cast<Signal *>(m_mainTree->GetItemData(m_mainTree->GetSelection()));
 
-   drawSignal(pos,size);
+   if (tempSignal != NULL)
+   {
+      tempSignal->SetBitPosition(pos);
+
+      clearButtons();
+
+      drawSignal(pos,size);
+   }
 
    event.Skip();
 }
@@ -306,4 +347,28 @@ void SerialConfigurator::ListFiles(void)
    m_filesList->SetSelection(0);
 }
 
+void SerialConfigurator::clearButtons(void)
+{
+   for (int i=0; i<NUM_OF_BUTTONS; i++)
+   {
+      buttons[i]->SetBackgroundColour(*defaultButtonColour);
+   }
+}
 
+void SerialConfigurator::drawSignal(int pos, int size)
+{
+   clearButtons();
+
+   if (size + pos <= NUM_OF_BUTTONS)
+   {
+      for (int i = pos; i<(pos + size); i++)
+      {
+         buttons[i]->SetBackgroundColour(wxColour(0xFF,0xFF,0xFF));
+      }
+   }
+   else
+   {
+      //m_bit_size_slider->SetValue(NUM_OF_BUTTONS);
+   }
+
+}

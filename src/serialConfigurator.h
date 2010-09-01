@@ -8,11 +8,26 @@
 
 class wxButton;
 class wxColour;
+class Signal;
 
 class SerialConfigurator : public MainFrame
 {
    public:
       SerialConfigurator(const wxString& title);
+
+      void KeyEvtHdl( wxKeyEvent& event );
+      Signal *signals[5];
+
+   private:
+      void clearButtons(void);
+      void drawSignal(int pos, int size);
+
+   protected:
+      wxArrayString files;
+      void ListFiles(void);
+      wxTreebook* m_treeCtrl2;
+      wxButton * buttons[64];
+      wxColour * defaultButtonColour;
 
       virtual void MainWindowActivatedEvtHdl( wxActivateEvent& event );
       virtual void MainWindowCloseEvtHdl( wxCloseEvent& event );
@@ -25,17 +40,7 @@ class SerialConfigurator : public MainFrame
       virtual void continueDragHdl( wxMouseEvent& event );
       virtual void BSS_OnScrollHdl( wxScrollEvent& event );
       virtual void BPS_OnScrollHdl( wxScrollEvent& event );
-      void KeyEvtHdl( wxKeyEvent& event );
-
-   private:
-      void clearButtons(void);
-      void drawSignal(int pos, int size);
-
-   protected:
-      wxArrayString files;
-      void ListFiles(void);
-      wxTreebook* m_treeCtrl2;
-      wxButton * buttons[64];
-      wxColour * defaultButtonColour;
+		virtual void TreeSelChangedHdl( wxTreeEvent& event );
+		virtual void PropTreeSelChangedHdl( wxTreeEvent& event );
 };
 #endif   /* ----- #ifndef serialconfigurator_INC  ----- */
