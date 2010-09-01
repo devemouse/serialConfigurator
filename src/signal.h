@@ -2,6 +2,7 @@
 #define  _SIGNAL_H_
 
 #include <wx/treectrl.h>
+#include <wx/string.h>
 
 //typedef signed char sint8;
 //typedef unsigned char uint8;
@@ -90,14 +91,32 @@ class Signal : public wxTreeItemData
       Signal();
 
       Signal(int _bit_size = 1, int _bit_position = 0);
-      Signal(int ID, int _bit_size = 1, int _bit_position = 0) : HandleId(ID), BitSize(_bit_size), BitPosition(_bit_position){}
+
+      Signal(int ID, int _bit_size = 1, int _bit_position = 0) 
+      {
+         Options[wxT("HandleId")] = ID;
+         Options[wxT("BitSize")] = _bit_size;
+         Options[wxT("BitPosition")] = _bit_position;
+      }
+
       ~Signal();
 
-      int GetBitSize() { return Options["BitSize"]; }
-      void SetBitSize(int _bs) { Options["BitSize"] = _bs; }
+      int GetPropertyValue(const wxString& _property_name = wxT("nil")) { return Options[_property_name]; }
+      void SetPropertyValue(const wxString& _property_name = wxT("nil"), int _value = 0){ Options[_property_name] = _value; } 
 
-      int GetBitPosition() { return Options["BitPosition"]; }
-      void SetBitPosition(int _bp) { Options["BitPosition"] = _bp; }
+      int GetBitSize() { 
+         return Options[wxT("BitSize")]; 
+      }
+      void SetBitSize(int _bs) {
+         Options[wxT("BitSize")] = _bs; 
+      }
+
+      int GetBitPosition() {
+         return Options[wxT("BitPosition")]; 
+      }
+      void SetBitPosition(int _bp) {
+         Options[wxT("BitPosition")] = _bp; 
+      }
 
 
 
@@ -148,8 +167,8 @@ class Signal : public wxTreeItemData
 #endif
 
    protected:
-      int BitPosition;                            /**< starting bit position in IPDU */
-      int BitSize;                                /**< how many bits does the signal take in IPdu */
+      //int BitPosition;                            /**< starting bit position in IPDU */
+      //int BitSize;                                /**< how many bits does the signal take in IPdu */
 
 };
 

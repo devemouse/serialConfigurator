@@ -21,9 +21,9 @@
 #include <wx/sizer.h>
 #include <wx/treectrl.h>
 #include <wx/panel.h>
-#include <wx/slider.h>
 #include <wx/stattext.h>
 #include <wx/statbox.h>
+#include <wx/slider.h>
 #include <wx/splitter.h>
 #include <wx/frame.h>
 
@@ -46,8 +46,8 @@ class MainFrame : public wxFrame
 			ID_ADD_BUTTON,
 			ID_DBG_BUTTON_01,
 			wxID_TREE,
-			wxID_BS_SLIDER,
 			wxID_BP_SLIDER,
+			wxID_BS_SLIDER,
 		};
 		
 		wxListBox* m_filesList;
@@ -65,12 +65,12 @@ class MainFrame : public wxFrame
 		wxTextCtrl* m_textCtrl2;
 		wxTextCtrl* m_textCtrl3;
 		wxTextCtrl* m_textCtrl4;
-		wxSlider* m_bit_size_slider;
-		wxStaticText* m_bit_size_label;
-		wxSlider* m_bit_pos_slider;
-		wxStaticText* m_bit_pos_label;
 		wxStaticText* m_optionDescription;
 		wxSlider* m_genericSlider;
+		wxSlider* m_bit_pos_slider;
+		wxStaticText* m_bit_pos_label;
+		wxSlider* m_bit_size_slider;
+		wxStaticText* m_bit_size_label;
 		wxGridSizer* buttonsSizer;
 		
 		// Virtual event handlers, overide them in your derived class
@@ -83,8 +83,8 @@ class MainFrame : public wxFrame
 		virtual void dbgButton02ClickEvtHdl( wxCommandEvent& event ){ event.Skip(); }
 		virtual void TreeSelChangedHdl( wxTreeEvent& event ){ event.Skip(); }
 		virtual void PropTreeSelChangedHdl( wxTreeEvent& event ){ event.Skip(); }
-		virtual void BSS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
 		virtual void BPS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
+		virtual void BSS_OnScrollHdl( wxScrollEvent& event ){ event.Skip(); }
 		
 	
 	public:

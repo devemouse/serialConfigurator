@@ -31,8 +31,8 @@
 	this->Layout();
    defaultButtonColour = new wxColour(buttons[0]->GetBackgroundColour());
 
-   m_bit_pos_label->SetLabel(wxString::Format(wxT("BP: %d "), 5));
-   m_bit_size_label->SetLabel(wxString::Format(wxT("BS: %d "), 5));
+   m_bit_pos_label->SetLabel(wxString::Format(wxT("POS:\n%d"), 5));
+   m_bit_size_label->SetLabel(wxString::Format(wxT("SIZE:\n%d"), 5));
    clearButtons();
    drawSignal(5,5);
 
@@ -199,7 +199,11 @@ void SerialConfigurator::TreeSelChangedHdl( wxTreeEvent& event )
       m_Text->AppendText(wxString::Format(wxT("\n%d "), tempSignal->HandleId));
 
       m_bit_size_slider->SetValue(tempSignal->GetBitSize());
+      m_bit_size_label->SetLabel(wxString::Format(wxT("SIZE:\n%d"), tempSignal->GetBitSize()));
+
       m_bit_pos_slider->SetValue(tempSignal->GetBitPosition());
+      m_bit_size_label->SetLabel(wxString::Format(wxT("SIZE:\n%d"), tempSignal->GetBitPosition()));
+
       clearButtons();
       drawSignal(tempSignal->GetBitPosition(), tempSignal->GetBitSize());
    }
@@ -209,6 +213,21 @@ void SerialConfigurator::TreeSelChangedHdl( wxTreeEvent& event )
 
 void SerialConfigurator::PropTreeSelChangedHdl( wxTreeEvent& event )
 { 
+   Signal * tempSignal = dynamic_cast<Signal *>(m_mainTree->GetItemData(m_mainTree->GetSelection()));
+
+   m_Text->AppendText(m_mainTree->GetItemText(m_mainTree->GetSelection()) + ": ");
+
+   if (tempSignal != NULL)
+   {
+      wxString property = m_Properties->GetItemText(event.GetItem());
+
+      m_Text->AppendText(m_Properties->GetItemText(event.GetItem()) + ": ");
+
+      m_genericSlider->SetValue(tempSignal->GetPropertyValue(property));
+
+      m_Text->AppendText(wxString::Format(wxT("%d\n"), tempSignal->GetPropertyValue(property)));
+   }
+
    event.Skip(); 
 }
 
@@ -252,7 +271,7 @@ void SerialConfigurator::BSS_OnScrollHdl( wxScrollEvent& event )
    int size = m_bit_size_slider->GetValue();
    int pos = m_bit_pos_slider->GetValue();
 
-   m_bit_size_label->SetLabel(wxString::Format(wxT("BS: %d "), size));
+   m_bit_size_label->SetLabel(wxString::Format(wxT("SIZE:\n%d"), size));
 
    Signal * tempSignal = dynamic_cast<Signal *>(m_mainTree->GetItemData(m_mainTree->GetSelection()));
 
@@ -271,7 +290,7 @@ void SerialConfigurator::BPS_OnScrollHdl( wxScrollEvent& event )
    int size = m_bit_size_slider->GetValue();
    int pos = m_bit_pos_slider->GetValue();
 
-   m_bit_pos_label->SetLabel(wxString::Format(wxT("BP: %d "), pos));
+   m_bit_pos_label->SetLabel(wxString::Format(wxT("POS:\n%d"), pos));
 
    Signal * tempSignal = dynamic_cast<Signal *>(m_mainTree->GetItemData(m_mainTree->GetSelection()));
 

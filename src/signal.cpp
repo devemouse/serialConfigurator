@@ -10,9 +10,8 @@ Signal::Signal()
 
 Signal::Signal(int _bit_size, int _bit_position)
 {
-
-   Options["BitSize"] = _bit_size;
-   Options["BitPosition"] = _bit_position;
+   Options[wxT("BitSize")] = _bit_size;
+   Options[wxT("BitPosition")] = _bit_position;
 }
 
 
