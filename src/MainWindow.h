@@ -21,9 +21,9 @@
 #include <wx/sizer.h>
 #include <wx/treectrl.h>
 #include <wx/panel.h>
+#include <wx/slider.h>
 #include <wx/stattext.h>
 #include <wx/statbox.h>
-#include <wx/slider.h>
 #include <wx/splitter.h>
 #include <wx/frame.h>
 
@@ -65,12 +65,12 @@ class MainFrame : public wxFrame
 		wxTextCtrl* m_textCtrl2;
 		wxTextCtrl* m_textCtrl3;
 		wxTextCtrl* m_textCtrl4;
-		wxStaticText* m_optionDescription;
 		wxSlider* m_genericSlider;
-		wxSlider* m_bit_pos_slider;
+		wxStaticText* m_optionDescription;
 		wxStaticText* m_bit_pos_label;
-		wxSlider* m_bit_size_slider;
+		wxSlider* m_bit_pos_slider;
 		wxStaticText* m_bit_size_label;
+		wxSlider* m_bit_size_slider;
 		wxGridSizer* buttonsSizer;
 		
 		// Virtual event handlers, overide them in your derived class

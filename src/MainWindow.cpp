@@ -54,7 +54,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	
 	bSizer1->Add( bSizer3, 0, wxEXPAND, 5 );
 	
-	m_mainTree = new wxTreeCtrl( this, wxID_TREE, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE|wxTR_HAS_BUTTONS );
+	m_mainTree = new wxTreeCtrl( this, wxID_TREE, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE|wxTR_HAS_BUTTONS|wxTR_HIDE_ROOT );
 	bSizer1->Add( m_mainTree, 2, wxALL|wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer5;
@@ -86,6 +86,9 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_textCtrl4 = new wxTextCtrl( m_panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer10->Add( m_textCtrl4, 0, wxALL|wxEXPAND, 5 );
 	
+	m_genericSlider = new wxSlider( m_panel4, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	bSizer10->Add( m_genericSlider, 0, wxALL|wxEXPAND, 5 );
+	
 	wxStaticBoxSizer* sbSizer2;
 	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( m_panel4, wxID_ANY, wxT("Description") ), wxVERTICAL );
 	
@@ -94,9 +97,6 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	sbSizer2->Add( m_optionDescription, 1, wxALL|wxEXPAND, 5 );
 	
 	bSizer10->Add( sbSizer2, 1, wxEXPAND, 5 );
-	
-	m_genericSlider = new wxSlider( m_panel4, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
-	bSizer10->Add( m_genericSlider, 0, wxALL|wxEXPAND, 5 );
 	
 	m_panel4->SetSizer( bSizer10 );
 	m_panel4->Layout();
@@ -110,31 +110,31 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	wxBoxSizer* bSizer61;
 	bSizer61 = new wxBoxSizer( wxVERTICAL );
 	
-	m_bit_pos_slider = new wxSlider( this, wxID_BP_SLIDER, 5, 0, 63, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL );
-	bSizer61->Add( m_bit_pos_slider, 1, wxALL|wxEXPAND, 5 );
-	
 	m_bit_pos_label = new wxStaticText( this, wxID_ANY, wxT("POS:\n00"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 	m_bit_pos_label->Wrap( -1 );
 	bSizer61->Add( m_bit_pos_label, 0, wxALL, 5 );
 	
-	bSizer12->Add( bSizer61, 0, wxEXPAND, 5 );
+	m_bit_pos_slider = new wxSlider( this, wxID_BP_SLIDER, 5, 0, 63, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL );
+	bSizer61->Add( m_bit_pos_slider, 1, wxALL|wxEXPAND, 5 );
+	
+	bSizer12->Add( bSizer61, 1, wxALIGN_RIGHT|wxEXPAND, 5 );
 	
 	wxBoxSizer* bSizer6;
 	bSizer6 = new wxBoxSizer( wxVERTICAL );
-	
-	m_bit_size_slider = new wxSlider( this, wxID_BS_SLIDER, 5, 1, 64, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL );
-	bSizer6->Add( m_bit_size_slider, 1, wxALL|wxEXPAND, 5 );
 	
 	m_bit_size_label = new wxStaticText( this, wxID_ANY, wxT("SIZE:\n00"), wxDefaultPosition, wxDefaultSize, wxALIGN_CENTRE );
 	m_bit_size_label->Wrap( -1 );
 	bSizer6->Add( m_bit_size_label, 0, wxALL, 5 );
 	
-	bSizer12->Add( bSizer6, 0, wxEXPAND, 5 );
+	m_bit_size_slider = new wxSlider( this, wxID_BS_SLIDER, 5, 1, 64, wxDefaultPosition, wxDefaultSize, wxSL_VERTICAL );
+	bSizer6->Add( m_bit_size_slider, 1, wxALL|wxEXPAND, 5 );
+	
+	bSizer12->Add( bSizer6, 1, wxALIGN_RIGHT|wxEXPAND, 5 );
 	
 	buttonsSizer = new wxGridSizer( 8, 8, 0, 0 );
 	
 	buttonsSizer->SetMinSize( wxSize( 600,600 ) ); 
-	bSizer12->Add( buttonsSizer, 3, wxALIGN_CENTER|wxEXPAND|wxFIXED_MINSIZE|wxSHAPED, 1 );
+	bSizer12->Add( buttonsSizer, 5, wxALIGN_CENTER|wxALIGN_LEFT|wxEXPAND|wxFIXED_MINSIZE|wxSHAPED, 1 );
 	
 	bSizer5->Add( bSizer12, 3, wxEXPAND, 5 );
 	

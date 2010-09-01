@@ -10,6 +10,7 @@ OBJS = $(sort \
 		 serialConfigurator.o \
 		 MainWindow.o \
 		 signal.o \
+		 ipdu.o \
 )
 
 
